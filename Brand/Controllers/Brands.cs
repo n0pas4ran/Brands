@@ -24,9 +24,8 @@ namespace MyApp.Controllers
             _logger = logger;
         }
         // GET all: api/Brands
-        
+
         [HttpGet]
-        [Authorize]
         public string Read()
         {
             string output = "Nothing has been added";
@@ -35,16 +34,15 @@ namespace MyApp.Controllers
                 output = "";
                 foreach(var ent in entries)
                 {
-                    output += ent.ToString() + "\n";
+                    output += JsonConvert.SerializeObject(ent) + "\n";
                 }
             }
             return output;
         }
 
         // GET api/Brands/{id}
-        
+
         [HttpGet("{id}")]
-        [Authorize]
         public string Read(int id)
         {
             string outPut = "Not Found";
@@ -83,7 +81,7 @@ namespace MyApp.Controllers
             return new OkResult();
 
         }
-        
+
         // DELETE api/Brands/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

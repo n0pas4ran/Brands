@@ -30,21 +30,7 @@ namespace Brand
         {
             services.AddControllers();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateAudience = true,
-                    ValidateIssuer = true,
-                    ValidateLifetime = true,
-                    ValidIssuer = "domain.com",
-                    ValidAudience = "domain.com",
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey =
-                        new SymmetricSecurityKey(
-                            System.Text.Encoding.UTF8.GetBytes("Security code for authentification"))
-                };
-            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,8 +41,7 @@ namespace Brand
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseAuthentication();
-            app.UseStaticFiles();
+            
 
             app.UseHttpsRedirection();
 
@@ -71,4 +56,3 @@ namespace Brand
         }
     }
 }
-
